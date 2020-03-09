@@ -1,0 +1,14 @@
+<mat-form-field>
+  <mat-label>Каталог</mat-label>
+  <mat-select>
+    <mat-option *ngFor="let productType of productTypes" (click)="onSelect(productType)">
+      {{ productType.name }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<!--<mat-tab-group>-->
+<!--  <mat-tab label="{{ productType.name }}" *ngFor="let productType of productTypes">-->
+<!--    <button mat-raised-button (click)="onSelect(productType)"> Click me! </button>-->
+<!--  </mat-tab>-->
+<!--</mat-tab-group>-->
