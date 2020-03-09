@@ -1,0 +1,19 @@
+<mat-toolbar color="primary" class="navbar">
+  <span><a routerLink="/home">ОПТИКА</a></span>
+  <div *ngIf="isAuthenticated; else elseBlock">
+    <span><a routerLink="/productType">Товари</a></span>
+    <span><a routerLink="/worker">Про нас</a></span>
+    <span><a routerLink="/cart">Корзина</a></span>
+    <span><a routerLink="/profile">Профіль</a></span>
+    <span><a (click)="logout()" href="/authenticate">Вийти</a></span>
+  </div>
+</mat-toolbar>
+
+<ng-template #elseBlock>
+  <div>
+    <span><a routerLink="/productType">Товари</a></span>
+    <span><a routerLink="/worker">Про нас</a></span>
+    <span *ngIf="!isAuthenticated"><a routerLink="/authenticate"> Вхід </a></span>
+  </div>
+</ng-template>
+

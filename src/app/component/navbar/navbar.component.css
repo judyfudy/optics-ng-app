@@ -1,0 +1,13 @@
+.navbar {
+  justify-content: space-between;
+}
+
+span {
+  font-family: "Times New Roman", sans-serif;
+  padding-right: 1rem;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+}
