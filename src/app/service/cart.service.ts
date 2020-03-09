@@ -1,8 +1,6 @@
 import {Injectable} from "@angular/core";
-import {HttpClient, HttpEvent, HttpHeaders, HttpParams} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {Product} from "../model/product";
-import {Observable} from "rxjs";
-import {ProductType} from "../model/productType";
 
 @Injectable({providedIn: 'root'})
 export class CartService {
