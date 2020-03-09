@@ -1,0 +1,22 @@
+<div>
+  <button mat-raised-button (click)="clearCart()"> Очистити корзину</button>
+  <button mat-raised-button (click)="getOrderAndSendEmail()"> Підтвердити замовлення</button>
+</div>
+
+<mat-card class="example-card" *ngFor="let product of products">
+  <mat-card-header>
+    <mat-card-title>{{ product.brand }} {{ product.model }}</mat-card-title>
+  </mat-card-header>
+  <img mat-card-image src="{{product.photo}}" alt="Photo of a Shiba Inu">
+  <mat-card-content>
+    <p>
+      Ціна: {{ product.price }}<br>
+      Кількість: {{ product.quantity }}<br>
+      Опис: {{ product.description }}<br>
+    </p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button (click)="deleteFromCart(product.id)">Видалити з корзини</button>
+  </mat-card-actions>
+</mat-card>
+
