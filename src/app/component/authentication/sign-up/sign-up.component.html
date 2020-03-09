@@ -1,0 +1,30 @@
+<form class="example-form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+  <mat-form-field class="example-full-width">
+    <mat-label>Ім'я</mat-label>
+    <input matInput type="text" formControlName="firstName" class="form-control">
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Прізвище</mat-label>
+    <input matInput type="text" formControlName="lastName" class="form-control">
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Пошта</mat-label>
+    <input matInput type="email" formControlName="email" class="form-control">
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Нікнейм</mat-label>
+    <input matInput type="text" formControlName="username" class="form-control">
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Пароль</mat-label>
+    <input matInput type="password" formControlName="pass" class="form-control">
+  </mat-form-field>
+
+  <button mat-raised-button [disabled]="loading">Увійти</button>
+  <button mat-raised-button [disabled]="loading">Зареєструватись</button>
+</form>
+
