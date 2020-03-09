@@ -1,0 +1,23 @@
+<mat-card class="example-card" *ngFor="let product of products">
+  <mat-card-header>
+    <mat-card-title>{{ product.brand }} {{ product.model }}</mat-card-title>
+  </mat-card-header>
+  <img mat-card-image src="{{ product.photo }}" alt="Photo of a Shiba Inu">
+  <mat-card-content>
+    <p>
+      Ціна: {{ product.price }}<br>
+      Кількість: {{ product.quantity }}<br>
+      Опис: {{ product.description }}<br>
+    </p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button *ngIf="isAuthenticated(); else elseBlock" mat-button (click)="addToCart(product.id)">Добавити в корзину
+    </button>
+  </mat-card-actions>
+</mat-card>
+
+<ng-template #elseBlock>
+  <a routerLink="/authenticate">
+    <button mat-button>Увійдіть щоб добавити в корзину</button>
+  </a>
+</ng-template>

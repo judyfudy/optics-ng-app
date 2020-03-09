@@ -1,0 +1,14 @@
+.mat-raised-button {
+  margin: 1rem;
+}
+
+.example-card {
+  max-width: 400px;
+  display: inline-block;
+  margin: 1rem;
+}
+
+.example-header-image {
+  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-size: cover;
+}
