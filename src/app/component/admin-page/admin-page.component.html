@@ -1,0 +1,14 @@
+<mat-list>
+  <mat-list-item *ngFor="let user of users">
+    {{ user.id }}
+    {{ user.firstName }}
+    {{ user.lastName }}
+    {{ user.email }}
+    {{ user.username }}
+    {{ user.userType }}
+    <mat-radio-group>
+      <mat-radio-button class="example-margin" value="ADMIN" (click)="changeRole('ADMIN', user.id)">ADMIN</mat-radio-button>
+      <mat-radio-button class="example-margin" value="USER" (click)="changeRole('USER', user.id)">USER</mat-radio-button>
+    </mat-radio-group>
+  </mat-list-item>
+</mat-list>
