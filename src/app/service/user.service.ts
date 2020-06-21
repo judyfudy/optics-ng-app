@@ -10,10 +10,13 @@ export class UserService {
 
   public url: string = 'http://localhost:8080/user';
 
+
   constructor(private http: HttpClient) {
   }
 
   getAuthenticatedUserInfo(): Observable<User> {
     return this.http.get<User>(this.url);
   }
+
+
 }
