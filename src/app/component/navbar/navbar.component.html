@@ -1,6 +1,7 @@
 <mat-toolbar color="primary" class="navbar">
   <span><a routerLink="/home">ОПТИКА</a></span>
   <div *ngIf="isAuthenticated; else elseBlock">
+    <span *ngIf="isAdmin"><a routerLink="/admin">Адміністратор</a></span>
     <span><a routerLink="/productType">Товари</a></span>
     <span><a routerLink="/worker">Про нас</a></span>
     <span><a routerLink="/cart">Корзина</a></span>
