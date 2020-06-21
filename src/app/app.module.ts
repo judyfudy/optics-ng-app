@@ -3,6 +3,7 @@ import {NgModule} from '@angular/core';
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
+
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {ProductTypeComponent} from './component/productType/productType.component';
@@ -16,7 +17,12 @@ import {AuthInterceptor} from "./service/authInterceptor";
 import {UserComponent} from './component/user/user.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MaterialModule} from "./material/material.module";
+import {MatRadioModule} from '@angular/material/radio';
 import {HomeComponent} from './component/home/home.component';
+import {UsernameValidatorComponent} from './component/username-validator/username-validator.component';
+import {AdminPageComponent} from './component/admin-page/admin-page.component';
+import {MatTableModule} from "@angular/material/table";
+import {FacebookLoginProvider, SocialAuthServiceConfig, SocialLoginModule} from "angularx-social-login";
 
 
 @NgModule({
@@ -31,6 +37,8 @@ import {HomeComponent} from './component/home/home.component';
     WorkerComponent,
     UserComponent,
     HomeComponent,
+    UsernameValidatorComponent,
+    AdminPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -40,13 +48,27 @@ import {HomeComponent} from './component/home/home.component';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MaterialModule,
+    MatRadioModule,
+    MatTableModule,
+    SocialLoginModule
   ],
-  providers: [{
-    provide: HTTP_INTERCEPTORS,
-    useClass: AuthInterceptor,
-    multi: true
-  }],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: FacebookLoginProvider.PROVIDER_ID,
+            provider: new FacebookLoginProvider('260501941721601'),
+          },
+        ],
+      } as SocialAuthServiceConfig,
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
 }
+
