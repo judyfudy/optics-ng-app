@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AuthenticationService} from "../../../service/authentication.service";
+import {FacebookLoginProvider, GoogleLoginProvider} from "angularx-social-login";
+import {SocialAuthService} from "angularx-social-login";
 import {first} from "rxjs/operators";
 
 @Component({
@@ -19,7 +21,7 @@ export class SignInComponent implements OnInit {
 
   constructor(private router: Router, private formBuilder: FormBuilder,
               private authenticationService: AuthenticationService,
-              private route: ActivatedRoute,) {
+              private route: ActivatedRoute, private socialAuthService: SocialAuthService) {
   }
 
   ngOnInit(): void {
@@ -43,11 +45,34 @@ export class SignInComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
 
-    if (this.loginForm.invalid) {return;}
+    if (this.loginForm.invalid) {
+      return;
+    }
 
     this.loading = true;
     this.authenticationService.login(this.f.username.value, this.f.password.value)
-      .subscribe(data => { window.location.href = this.returnUrl; this.loading = false; } );
+      .subscribe(data => {
+        window.location.href = this.returnUrl;
+        this.loading = false;
+      });
+  }
+
+  public signinWithFacebook() {
+    this.socialAuthService.signIn(FacebookLoginProvider.PROVIDER_ID).then((userData) => {
+      console.log(userData);
+      this.loading = true;
+      this.authenticationService.loginFacebook(userData)
+        .pipe(first())
+        .subscribe(
+          data => {
+            console.log(data);
+            window.location.href = this.returnUrl;
+            this.loading = false;
+          },
+          error => {
+            this.loading = false;
+          });
+    });
   }
 
 }
