@@ -9,6 +9,14 @@
     <input matInput type="password" formControlName="password" class="form-control">
   </mat-form-field>
   <button mat-raised-button [disabled]="loading">Увійти</button>
-  <a routerLink="/signup"><button mat-raised-button>Реєстрація</button></a>
+  <a routerLink="/signup">
+    <button mat-raised-button>Реєстрація</button>
+  </a>
 </form>
+
+<div>
+  <button class="loginBtn loginBtn--facebook" (click)="signinWithFacebook()">
+    Login with Facebook
+  </button>
+</div>
 
