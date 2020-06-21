@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
-import {FormGroup, Validators, FormBuilder} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AuthenticationService} from "../../../service/authentication.service";
+import {UsernameValidatorComponent} from "../../username-validator/username-validator.component";
 
 @Component({
   selector: 'app-sign-up',
@@ -14,10 +15,13 @@ export class SignUpComponent implements OnInit {
   loading = false;
   submitted = false;
 
-  constructor(private router: Router, private formBuilder: FormBuilder, private authenticationService: AuthenticationService) {
+  constructor(private router: Router, private formBuilder: FormBuilder,
+              private authenticationService: AuthenticationService,
+              private usernameValidator: UsernameValidatorComponent) {
   }
 
   ngOnInit(): void {
+
     if (localStorage.getItem('accessToken')) {
       this.router.navigate(['/']);
     }
@@ -25,13 +29,20 @@ export class SignUpComponent implements OnInit {
     this.registerForm = this.formBuilder.group({
       firstName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(16)]],
       lastName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(16)]],
-      username: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(32)]],
+      username: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(16)],
+      this.usernameValidator.validate.bind(this.usernameValidator)],
       pass: ['', [Validators.required, Validators.minLength(3)]],
       email: ['', [Validators.required, Validators.email, Validators.maxLength(60)]],
     });
   }
 
-  get f() { return this.registerForm.controls; }
+  get f() {
+    return this.registerForm.controls;
+  }
+
+  get username() {
+    return this.registerForm.get('username');
+  }
 
   onSubmit() {
     this.submitted = true;
@@ -46,4 +57,10 @@ export class SignUpComponent implements OnInit {
         this.router.navigate(["/"]);
       });
   }
+
+  hasError(field: string, error: string) {
+    const ctrl = this.registerForm.get(field);
+    return ctrl.dirty && ctrl.hasError(error);
+  }
+
 }
